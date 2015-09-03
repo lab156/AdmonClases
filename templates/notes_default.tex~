@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\usepackage{styles/general}
+\usepackage{style/general}
 
 %ARCHIVO PARA LAS NOTAS ACUMULADAS DE LA CLASE
 %NO DEBERIA HABER PROBLEMA EN AGREGAR MAS PAQUETES

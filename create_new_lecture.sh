@@ -63,7 +63,7 @@ function new_dir {
         #It appears that ln only works when they are created from 
         #the inside of the directory
         cd $1 &&\
-        ln -s ../general.sty .
+        ln -s ../styles/general.sty .
         cd ..
     }
 
