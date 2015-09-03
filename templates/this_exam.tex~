@@ -33,5 +33,5 @@
 \underline{\textbf{Duración: 45 min.}}\\[0.3cm]
 \textbf{Instrucciones:} A continuación se le presentan una serie de problemas, léalos cuidadosamente, resuelvalos en forma clara y ordenada.
 \end{examtop}
-\input{paper.tex}
+\input{exam.tex}
 \end{document}

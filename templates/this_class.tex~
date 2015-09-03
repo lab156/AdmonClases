@@ -7,6 +7,8 @@
 \documentclass{article}
 
 \usepackage{general}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
 
 \begin{document}
 \input{class.tex}

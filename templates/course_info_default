@@ -11,6 +11,9 @@ COURSEINSTRUCTOR='Unknown Instructor'
 #Period
 COURSESEMESTER='Unknown Period'
 
+#Preferred language options en,es
+COURSELANG=en
+
 #Sync the .pdf file with server
 #When working on a remote machine
 #Uncomment the variable to start syncing

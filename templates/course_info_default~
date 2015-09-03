@@ -1,15 +1,15 @@
 #Name of the class 
-COURSENAME='Real Analysis II'
+COURSENAME='Unknown'
 
 #Name of target (name of pdf file to produce)
 #No space; this is a filename
-COURSETARGETNAME=analysis_lecture_notes
+COURSETARGETNAME=default_name
 
 #Instructor
-COURSEINSTRUCTOR='S. Szareck'
+COURSEINSTRUCTOR='Unknown Instructor'
 
 #Period
-COURSESEMESTER='Spring 2015'
+COURSESEMESTER='Unknown Period'
 
 #Sync the .pdf file with server
 #When working on a remote machine

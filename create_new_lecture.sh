@@ -13,6 +13,7 @@
 #   
 # run with no arguments to create the next lecture file
 
+# CHECK IF THE COURSE CONFIGURATION FILE IS AVAILABLE
 if [ -e course_info ]; 
 then
    source course_info 
@@ -20,6 +21,21 @@ else
    echo "No hay archivo de configuracion; copielo de la carpeta templates y completelo"
    exit 10
 fi
+
+#SET LANGUAGE
+case $COURSELANG in
+    en)
+        STYLEFILE="styles/general.sty"
+        ;;
+    es)
+        echo "setting lang to spanish"
+        STYLEFILE="styles/general_es.sty"
+        ;;
+    \?)
+        echo "lenguaje $COURSELANG no reconocido"
+        exit 2
+        ;;
+esac
 
 #DEFAULT OPTIONS
 FILESUFFIX=class
@@ -33,7 +49,7 @@ while getopts h:e: opt; do
             NAMEOFDIR=$OPTARG
             ;;
         e)
-            echo "Creating new exma dir: $OPTARG" >&2
+            echo "Creating new exam dir: $OPTARG" >&2
             FILESUFFIX=exam
             NAMEOFDIR=$OPTARG
             ;;
@@ -63,7 +79,7 @@ function new_dir {
         #It appears that ln only works when they are created from 
         #the inside of the directory
         cd $1 &&\
-        ln -s ../styles/general.sty .
+        ln -s ../$STYLEFILE ./general.sty
         cd ..
     }
 

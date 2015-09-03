@@ -5,8 +5,11 @@
 
 
 \documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
 
 \usepackage{general}
+
 
 \newcommand{\problem}[1]{\section*{Problem #1}}
 \newcommand{\subpart}[1]{\subsection*{Part #1}}
