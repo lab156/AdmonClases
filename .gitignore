@@ -1,0 +1,11 @@
+#Ignorar todo 
+*
+
+#Excepto estos archivos
+!create_new_lecture.sh
+!.gitignore
+!.vimdir
+!templates/
+!templates/*
+!scripts/
+!scripts/*

@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   TEMPLATE TO RUN A CLASS.TEX FILE WITHOUT THE REST OF    %
+%   CLASS FILES                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[letterpaper]{examdesign}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{general}
+\pagestyle{empty}
+
+
+%\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\subpart}[1]{\subsection*{Part #1}}
+
+\NoRearrange
+
+\begin{document}
+\begin{examtop}
+\begin{center}
+  \Large \textsc{Universidad Nacional Autónoma de Honduras}\\
+  %\textbf{(UJCV)}\\
+  \large Departamento de Matemática\\
+  \textbf{EXAMEN DEL ?????? PARCIAL} \\%\framebox{\Alph{version}}\\
+  Programación MM-314\\
+  \begin{flushleft}
+  Nombre: \rule{0.4\textwidth}{.4pt}
+  No. de Cuenta: \rule{0.2\textwidth}{.4pt}\\
+  \end{flushleft}
+\end{center}
+\underline{\textbf{Duración: 45 min.}}\\[0.3cm]
+\textbf{Instrucciones:} A continuación se le presentan una serie de problemas, léalos cuidadosamente, resuelvalos en forma clara y ordenada.
+\end{examtop}
+\input{exam.tex}
+\end{document}

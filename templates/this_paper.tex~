@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   TEMPLATE TO RUN A CLASS.TEX FILE WITHOUT THE REST OF    %
+%   CLASS FILES                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass{article}
+
+\usepackage{general}
+
+\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\subpart}[1]{\subsection*{Part #1}}
+
+\begin{document}
+\input{paper.tex}
+\end{document}

@@ -1,0 +1,17 @@
+#Name of the class 
+COURSENAME='Real Analysis II'
+
+#Name of target (name of pdf file to produce)
+#No space; this is a filename
+COURSETARGETNAME=analysis_lecture_notes
+
+#Instructor
+COURSEINSTRUCTOR='S. Szareck'
+
+#Period
+COURSESEMESTER='Spring 2015'
+
+#Sync the .pdf file with server
+#When working on a remote machine
+#Uncomment the variable to start syncing
+#SYNCTOSERVER=0
