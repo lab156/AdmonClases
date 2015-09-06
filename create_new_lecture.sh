@@ -13,6 +13,18 @@
 #   
 # run with no arguments to create the next lecture file
 
+#GET THE NAME OF THE CURRENT DIRECTORY
+CURRDIR=${PWD##*/}
+
+if [ "$CURRDIR" == AdmonClases ];
+then
+    echo "Currently working in local dir: "$CURRDIR
+    GETDIR="./"
+else
+    GETDIR="./AdmonClases/"
+fi
+
+
 # CHECK IF THE COURSE CONFIGURATION FILE IS AVAILABLE
 if [ -e course_info ]; 
 then
@@ -25,11 +37,11 @@ fi
 #SET LANGUAGE
 case $COURSELANG in
     en)
-        STYLEFILE="styles/general.sty"
+        STYLEFILE=$GETDIR"styles/general.sty"
         ;;
     es)
         echo "setting lang to spanish"
-        STYLEFILE="styles/general_es.sty"
+        STYLEFILE=$GETDIR"styles/general_es.sty"
         ;;
     \?)
         echo "lenguaje $COURSELANG no reconocido"
@@ -74,12 +86,12 @@ done | sort -n | tail -1
 #FUNCTION THAT CREATES A DIRECTORY AND ITS LINKS 
 function new_dir {
     mkdir $1 &&\
-        cp ./templates/this_$FILESUFFIX.tex $1 &&\
+        cp ${GETDIR}templates/this_$FILESUFFIX.tex $1 &&\
         touch $1/$FILESUFFIX.tex &&\
         #It appears that ln only works when they are created from 
         #the inside of the directory
         cd $1 &&\
-        ln -s ../$STYLEFILE ./general.sty
+        ln -s ../$STYLEFILE ./general.sty 
         cd ..
     }
 
@@ -89,7 +101,7 @@ function add_to_tex_file {
         if [ ! -e $TEXNOTES ]; 
         then
         echo "NO hay archivo de $TEXNOTES notas... lo jalamos de templates" 
-        cp templates/notes_default.tex $TEXNOTES
+        cp ${GETDIR}templates/notes_default.tex $TEXNOTES
         fi
         match='\\end{document}'
         insert='\\input{'$1'/'$FILESUFFIX'}'
