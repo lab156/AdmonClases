@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}[2000/01/01]
 \ProvidesPackage{general}[2014/01/05 Paquete General de Apuntes]
 
+\RequirePackage[spanish]{babel}
+\RequirePackage[utf8]{inputenc}
 \RequirePackage{euscript}
 \RequirePackage{amsmath,amsfonts}
 \RequirePackage{amssymb}
@@ -52,7 +54,7 @@
 \newtheorem{lema}{Lemma}
 
 \theoremstyle{definition}
-\newtheorem{ddef}{Definition}
+\newtheorem{ddef}{Definicion}
 
 %Lie groups are so important that we have to do an specific command
 \newcommand{\lie}[1]{\mathfrak{#1}}
