@@ -26,6 +26,7 @@
 \newcommand{\borel}{\mathbf{\EuScript{B}}}
 \newcommand{\atlas}{\mathcal{A}}
 \renewcommand{\o}{\EuScript{O}}
+\newcommand{\NNN}{\textsc{N}}
 \newcommand{\vesp}{\EuScript{X}}
 \newcommand{\vespY}{\EuScript{Y}}
 \newcommand{\tnsp}{\text{\textbf{T}}}
@@ -38,6 +39,7 @@
 \newcommand{\trace}{\operatorname{trace}}
 \newcommand{\Ad}{\operatorname{Ad}}
 \newcommand{\ad}{\operatorname{ad}}
+\renewcommand{\v}{\Vert}
 %%%%%%%%MORPHISMS%%%%%%%%%%%%%
 %%%%%%T. Hungerford uses Capitalized name %%
 \newcommand{\ndo}{\operatorname{End}}
@@ -47,14 +49,14 @@
 
 \newcommand{\from}{:\,}
 
-\newtheorem{remarks}{Remarks}
-\newtheorem{teorema}{Theorem}
-\newtheorem{corol}{Corollary}
-\newtheorem{examples}{Examples}
+\newtheorem{remarks}{Observaciones}
+\newtheorem{teorema}{Teorema}
+\newtheorem{corol}{Corolario}
+\newtheorem{examples}{Ejemplos}
 \newtheorem{lema}{Lemma}
 
 \theoremstyle{definition}
-\newtheorem{ddef}{Definicion}
+\newtheorem{ddef}{Definici\'on}
 
 %Lie groups are so important that we have to do an specific command
 \newcommand{\lie}[1]{\mathfrak{#1}}
