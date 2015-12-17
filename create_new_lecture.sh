@@ -62,6 +62,8 @@ while getopts h:e: opt; do
             ;;
         e)
             echo "Creating new exam dir: $OPTARG" >&2
+            read -p "Que Parcial? (ej. primero) " ORDINAL_LOW
+            ORDINAL=${ORDINAL_LOW^^}
             FILESUFFIX=exam
             NAMEOFDIR=$OPTARG
             ;;
@@ -86,7 +88,7 @@ done | sort -n | tail -1
 #FUNCTION THAT CREATES A DIRECTORY AND ITS LINKS 
 function new_dir {
     mkdir $1 &&\
-        cp ${GETDIR}templates/this_$FILESUFFIX.tex $1 &&\
+        ${GETDIR}scripts/plantillar.sh ${GETDIR}templates/this_$FILESUFFIX.tex $ORDINAL>$1/this_$FILESUFFIX.tex  &&\
         touch $1/$FILESUFFIX.tex &&\
         #It appears that ln only works when they are created from 
         #the inside of the directory

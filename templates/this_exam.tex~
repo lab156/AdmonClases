@@ -5,8 +5,6 @@
 
 
 \documentclass[letterpaper]{examdesign}
-\usepackage[spanish]{babel}
-\usepackage[utf8]{inputenc}
 
 \usepackage{general}
 \pagestyle{empty}
@@ -24,7 +22,7 @@
   %\textbf{(UJCV)}\\
   \large Departamento de Matemática\\
   \textbf{EXAMEN DEL ?????? PARCIAL} \\%\framebox{\Alph{version}}\\
-  Programación MM-314\\
+  %COURSENAME% \\
   \begin{flushleft}
   Nombre: \rule{0.4\textwidth}{.4pt}
   No. de Cuenta: \rule{0.2\textwidth}{.4pt}\\
