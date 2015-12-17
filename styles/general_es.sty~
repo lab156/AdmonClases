@@ -17,6 +17,7 @@
 
 
 \newcommand{\RR}{\mathbb{R}}
+\renewcommand{\Re}{\text{Re\,}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\CC}{\mathbb{C}}
@@ -26,7 +27,7 @@
 \newcommand{\borel}{\mathbf{\EuScript{B}}}
 \newcommand{\atlas}{\mathcal{A}}
 \renewcommand{\o}{\EuScript{O}}
-\newcommand{\NNN}{\textsc{N}}
+\newcommand{\NNN}{\mathcal{N}}
 \newcommand{\vesp}{\EuScript{X}}
 \newcommand{\vespY}{\EuScript{Y}}
 \newcommand{\tnsp}{\text{\textbf{T}}}
@@ -36,6 +37,7 @@
 \renewcommand{\ker}{\operatorname{Ker}}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\gen}{\operatorname{gen}}
 \newcommand{\trace}{\operatorname{trace}}
 \newcommand{\Ad}{\operatorname{Ad}}
 \newcommand{\ad}{\operatorname{ad}}
@@ -48,6 +50,7 @@
 \renewcommand{\hom}{\operatorname{Hom}}
 
 \newcommand{\from}{:\,}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \newtheorem{remarks}{Observaciones}
 \newtheorem{teorema}{Teorema}
@@ -60,6 +63,7 @@
 
 %Lie groups are so important that we have to do an specific command
 \newcommand{\lie}[1]{\mathfrak{#1}}
+\newcommand{\pin}[2]{\langle #1,\, #2 \rangle}
 
 %To reference labels in between lecture files
 %USAGE: iflabelexists{labelName}{\ref{labelName}}{else statement}
