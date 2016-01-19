@@ -53,7 +53,7 @@ esac
 FILESUFFIX=class
 NAMEOFDIR=$1
 
-while getopts h:e: opt; do
+while getopts h:e:s opt; do
     case $opt in
         h)
             echo "Creating new hw dir: $OPTARG" >&2
@@ -66,6 +66,11 @@ while getopts h:e: opt; do
             ORDINAL=${ORDINAL_LOW^^}
             FILESUFFIX=exam
             NAMEOFDIR=$OPTARG
+            ;;
+        s)
+            echo "Creando el Silabo de la clase"
+            FILESUFFIX=silabo
+            NAMEOFDIR=silabo
             ;;
         \?)
             echo "Invalid Option" >&2
