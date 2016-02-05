@@ -3,6 +3,8 @@
 #   Usage:
 #   Default value
 #     $ create_new_clase.sh [number of the class you want to create]
+#   -t <number>
+#   el numero de la tarea que se esta creando
 #   -h <dirname>
 #   the flag -h nameofdir to create directory for homeworks
 #   -e <dirname>
@@ -51,14 +53,22 @@ esac
 
 #DEFAULT OPTIONS
 FILESUFFIX=class
+#PREFIX TO LOOKUP IN TEMPLATES
+FILEPREFIX=this
 NAMEOFDIR=$1
 
-while getopts h:e:s opt; do
+while getopts t:h:e:s opt; do
     case $opt in
         h)
             echo "Creating new hw dir: $OPTARG" >&2
             FILESUFFIX=paper
             NAMEOFDIR=$OPTARG
+            ;;
+        t)
+            echo "Creando directorio: tarea$OPTARG" >&2
+            FILESUFFIX=tarea
+            TAREANUM=$OPTARG
+            NAMEOFDIR=tarea$OPTARG
             ;;
         e)
             echo "Creating new exam dir: $OPTARG" >&2
@@ -93,7 +103,7 @@ done | sort -n | tail -1
 #FUNCTION THAT CREATES A DIRECTORY AND ITS LINKS 
 function new_dir {
     mkdir $1 &&\
-        ${GETDIR}scripts/plantillar.sh ${GETDIR}templates/this_$FILESUFFIX.tex $ORDINAL>$1/this_$FILESUFFIX.tex  &&\
+        plantillar2 ${GETDIR}templates/${FILEPREFIX}_$FILESUFFIX.tex $ORDINAL>$1/${COURSECODE}_$FILESUFFIX.tex  &&\
         touch $1/$FILESUFFIX.tex &&\
         #It appears that ln only works when they are created from 
         #the inside of the directory
@@ -101,6 +111,15 @@ function new_dir {
         ln -s ../$STYLEFILE ./general.sty 
         cd ..
     }
+
+function plantillar2 {
+template_file=$1
+
+sed -e "s;%COURSENAME%;$COURSENAME;g"\
+    -e "s;%ORDINAL%;$2;g"\
+    -e "s;%COURSECODE%;$COURSECODE;g"\
+    -e "s;%TAREANUM%;$TAREANUM;g" $1
+}
 
         #add the line to the TEX file
 function add_to_tex_file {

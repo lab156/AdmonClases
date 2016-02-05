@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source ./course_info
+source $2
 
 template_file=$1
 
