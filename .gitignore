@@ -1,3 +1,4 @@
-#Ignorar todo 
+#IGNORE VIMs TEMPORARY AND SWAP FILES
+*.swp
 *~
 

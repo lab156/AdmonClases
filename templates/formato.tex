@@ -1,0 +1,65 @@
+\documentclass[letterpaper,landscape]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage[landscape]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+
+
+\setlength{\oddsidemargin}{-0.4in}		% default=0in
+\setlength{\evensidemargin}{-0.4in}
+\setlength{\textwidth}{9.8in}		% default=9in
+
+\setlength{\columnsep}{0.5in}		% default=10pt
+\setlength{\columnseprule}{1pt}		% default=0pt (no line)
+
+\setlength{\textheight}{5.85in}		% default=5.15in
+\setlength{\topmargin}{-0.15in}		% default=0.20in
+\setlength{\headsep}{0.25in}		% default=0.35in
+
+\setlength{\parskip}{1.2ex}
+\setlength{\parindent}{0mm}
+
+\pagestyle{fancy}
+
+\lhead{\setlength{\unitlength}{0mm}
+  \begin{picture}(10,10)
+    \put(0,0){\includegraphics[width=1.5cm]{logo.jpg}}
+  \end{picture}}
+%\lhead{\bfseries{Cálculo Integral I}}
+
+
+
+\begin{document}
+\begin{center}
+\textsc{{\large Universidad Nacional Autónoma de Honduras -- Facultad de Ciencias -- Departamento de Matemáticas}\\ Listado de Notas Originales}
+\end{center}
+\begin{flushleft}
+CODÍGO: \underline{ \hspace{5pt}    \texttt{%COURSECODE%}  \hspace{5pt}   }
+NOMBRE DE LA ASIGNATURA: \underline{    \hspace{5pt} \texttt{%COURSENAME%}  \hspace{5pt}   } 
+SECCIÓN: \underline{\hspace{5pt}    \texttt{1201}  \hspace{5pt}}
+UV: \underline{\hspace{5pt} \texttt{4} \hspace{5pt}}\\
+PERIODO: \underline{\hspace{5pt}    \texttt{%COURSESEMESTER%}  \hspace{5pt}}
+AÑO: \underline{\hspace{5pt}    \texttt{2015}  \hspace{5pt}}
+PROFESOR: \underline{\hspace{5pt}    \texttt{%COURSEINSTRUCTOR%}  \hspace{5pt}}
+NÚMERO DE ASIGNATURA: \underline{\hspace{5pt}    \texttt{77849}  \hspace{5pt}}\\
+\end{flushleft}
+%%% AQUI PONEMOS LA TABLA
+%\begin{center}
+\begin{longtable}[c]{|c|c|l|l|l|l|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\input{notas.cvs}
+\end{longtable}
+%\end{center}
+\vspace{25pt}
+\begin{flushright}
+\begin{minipage}[b]{10cm}
+\hrule
+\vspace{3pt}
+\begin{center} Luis Berlioz \end{center}
+\end{minipage}
+\end{flushright}
+
+\end{document}

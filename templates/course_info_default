@@ -11,8 +11,21 @@ COURSETARGETNAME=default_name
 #Instructor
 COURSEINSTRUCTOR='Unknown Instructor'
 
+#Numero de unidades valorativas
+COURSENUMBERUV='0'
+
+#Este es el numero de 4 digitos extrano de la clase que siempre sale en la sabana
+COURSEIDNUMBER='0000'
+
 #Period
+#ej Tercer Periodo 2034
 COURSESEMESTER='Unknown Period'
+
+#year ej. 2014
+COURSEYEAR='1945'
+
+#ej. Tercero
+COURSESEMESTERORDINAL='Semestre Desconocido'
 
 #Preferred language options en,es
 COURSELANG=en

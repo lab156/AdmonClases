@@ -1,6 +1,9 @@
 #Name of the class 
 COURSENAME='Unknown'
 
+#institution code of course
+COURSECODE='MMM-101'
+
 #Name of target (name of pdf file to produce)
 #No space; this is a filename
 COURSETARGETNAME=default_name

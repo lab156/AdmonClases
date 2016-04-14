@@ -53,7 +53,7 @@ esac
 FILESUFFIX=class
 NAMEOFDIR=$1
 
-while getopts h:e: opt; do
+while getopts h:e:f opt; do
     case $opt in
         h)
             echo "Creating new hw dir: $OPTARG" >&2
@@ -66,6 +66,9 @@ while getopts h:e: opt; do
             ORDINAL=${ORDINAL_LOW^^}
             FILESUFFIX=exam
             NAMEOFDIR=$OPTARG
+            ;;
+        f) echo "Creating new FormatoNotas dir" >&2
+            NAMEOFDIR=FormatoNotas
             ;;
         \?)
             echo "Invalid Option" >&2
@@ -125,6 +128,13 @@ if [ "$NAMEOFDIR" == "" ] ; then
 elif [ -a $NAMEOFDIR ] ; then
     echo "The file already exists!!!"
     exit 1
+elif [ "$NAMEOFDIR" == "FormatoNotas" ] ; then
+    mkdir $NAMEOFDIR
+    ${GETDIR}scripts/plantillar.sh ${GETDIR}templates/formato.tex $ORDINAL>\
+        $NAMEOFDIR/formato.tex &&\
+        ${GETDIR}scripts/formateador.py &&\
+        cp ${GETDIR}images/logo.jpg $NAMEOFDIR
+    exit 0
 else
     new_dir $NAMEOFDIR
     exit 0
