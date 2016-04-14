@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}[2000/01/01]
 \ProvidesPackage{general}[2014/01/05 Paquete General de Apuntes]
 
+\RequirePackage[spanish]{babel}
+\RequirePackage[utf8]{inputenc}
 \RequirePackage{euscript}
 \RequirePackage{amsmath,amsfonts}
 \RequirePackage{amssymb}
