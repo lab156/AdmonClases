@@ -4,6 +4,9 @@ COURSENAME='Unknown'
 #institution code of course
 COURSECODE='MMM-101'
 
+#Course short name (used a prefix for .pdf files)
+COURSENICKNAME='mm111'
+
 #Name of target (name of pdf file to produce)
 #No space; this is a filename
 COURSETARGETNAME=default_name
