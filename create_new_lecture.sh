@@ -3,6 +3,8 @@
 #   Usage:
 #   Default value
 #     $ create_new_clase.sh [number of the class you want to create]
+#   -t <number>
+#   el numero de la tarea que se esta creando
 #   -h <dirname>
 #   the flag -h nameofdir to create directory for homeworks
 #   -e <dirname>
@@ -51,19 +53,37 @@ esac
 
 #DEFAULT OPTIONS
 FILESUFFIX=class
+#PREFIX TO LOOKUP IN TEMPLATES
+FILEPREFIX=this
 NAMEOFDIR=$1
 
-while getopts h:e: opt; do
+while getopts t:h:e:sf opt; do
     case $opt in
         h)
             echo "Creating new hw dir: $OPTARG" >&2
             FILESUFFIX=paper
             NAMEOFDIR=$OPTARG
             ;;
+        t)
+            echo "Creando directorio: tarea$OPTARG" >&2
+            FILESUFFIX=tarea
+            TAREANUM=$OPTARG
+            NAMEOFDIR=tarea$OPTARG
+            ;;
         e)
             echo "Creating new exam dir: $OPTARG" >&2
+            read -p "Que Parcial? (ej. primer) " ORDINAL_LOW
+            ORDINAL=${ORDINAL_LOW^^}
             FILESUFFIX=exam
             NAMEOFDIR=$OPTARG
+            ;;
+        f) echo "Creating new FormatoNotas dir" >&2
+            NAMEOFDIR=FormatoNotas
+            ;;
+        s)
+            echo "Creando el Silabo de la clase"
+            FILESUFFIX=silabo
+            NAMEOFDIR=silabo
             ;;
         \?)
             echo "Invalid Option" >&2
@@ -86,7 +106,7 @@ done | sort -n | tail -1
 #FUNCTION THAT CREATES A DIRECTORY AND ITS LINKS 
 function new_dir {
     mkdir $1 &&\
-        cp ${GETDIR}templates/this_$FILESUFFIX.tex $1 &&\
+        plantillar2 ${GETDIR}templates/${FILEPREFIX}_$FILESUFFIX.tex $ORDINAL>$1/${COURSECODE}_$NAMEOFDIR.tex  &&\
         touch $1/$FILESUFFIX.tex &&\
         #It appears that ln only works when they are created from 
         #the inside of the directory
@@ -94,6 +114,15 @@ function new_dir {
         ln -s ../$STYLEFILE ./general.sty 
         cd ..
     }
+
+function plantillar2 {
+template_file=$1
+
+sed -e "s;%COURSENAME%;$COURSENAME;g"\
+    -e "s;%ORDINAL%;$2;g"\
+    -e "s;%COURSECODE%;$COURSECODE;g"\
+    -e "s;%TAREANUM%;$TAREANUM;g" $1
+}
 
         #add the line to the TEX file
 function add_to_tex_file {
@@ -123,6 +152,13 @@ if [ "$NAMEOFDIR" == "" ] ; then
 elif [ -a $NAMEOFDIR ] ; then
     echo "The file already exists!!!"
     exit 1
+elif [ "$NAMEOFDIR" == "FormatoNotas" ] ; then
+    mkdir $NAMEOFDIR
+    ${GETDIR}scripts/plantillar.sh ${GETDIR}templates/formato.tex $ORDINAL>\
+        $NAMEOFDIR/formato.tex &&\
+        ${GETDIR}scripts/formateador.py &&\
+        cp ${GETDIR}images/logo.jpg $NAMEOFDIR
+    exit 0
 else
     new_dir $NAMEOFDIR
     exit 0

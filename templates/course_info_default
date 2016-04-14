@@ -4,6 +4,9 @@ COURSENAME='Unknown'
 #institution code of course
 COURSECODE='MMM-101'
 
+#Course short name (used a prefix for .pdf files)
+COURSENICKNAME='mm111'
+
 #Name of target (name of pdf file to produce)
 #No space; this is a filename
 COURSETARGETNAME=default_name
@@ -11,8 +14,21 @@ COURSETARGETNAME=default_name
 #Instructor
 COURSEINSTRUCTOR='Unknown Instructor'
 
+#Numero de unidades valorativas
+COURSENUMBERUV='0'
+
+#Este es el numero de 4 digitos extrano de la clase que siempre sale en la sabana
+COURSEIDNUMBER='0000'
+
 #Period
+#ej Tercer Periodo 2034
 COURSESEMESTER='Unknown Period'
+
+#year ej. 2014
+COURSEYEAR='1945'
+
+#ej. Tercero
+COURSESEMESTERORDINAL='Semestre Desconocido'
 
 #Preferred language options en,es
 COURSELANG=en

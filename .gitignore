@@ -1,14 +1,4 @@
-#Ignorar todo 
-*
+#IGNORE VIMs TEMPORARY AND SWAP FILES
+*.swp
+*~
 
-#Excepto estos archivos
-!create_new_lecture.sh
-!.gitignore
-!.vimdir
-!templates/
-!templates/*
-!scripts/
-!scripts/*
-!styles/
-!styles/*
-!README.md
