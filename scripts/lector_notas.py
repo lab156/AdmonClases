@@ -47,8 +47,12 @@ class LectorNotasCSV():
 
     def list_email_addresses(self):
         salida = []
+
+        campos = [c for c in self.encabezados if 'correo' in c.lower()]
+
         for l in self.Dlist:
-            salida.append(l['Correo Electronico'])
+            for camp in campos:
+                salida.append(l[camp])
         return salida
 
 

@@ -57,7 +57,7 @@ FILESUFFIX=class
 FILEPREFIX=this
 NAMEOFDIR=$1
 
-while getopts t:h:e:sf opt; do
+while getopts t:h:e:sfl opt; do
     case $opt in
         h)
             echo "Creating new hw dir: $OPTARG" >&2
@@ -84,6 +84,12 @@ while getopts t:h:e:sf opt; do
             echo "Creando el Silabo de la clase"
             FILESUFFIX=silabo
             NAMEOFDIR=silabo
+            ;;
+
+        l) 
+            echo "Lista de correos de $COURSENAME" >&2
+            python ${GETDIR}scripts/correos_lista.py ${PWD}/Listado.ods
+            exit 0
             ;;
         \?)
             echo "Invalid Option" >&2
