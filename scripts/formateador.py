@@ -2,6 +2,7 @@
 import subprocess
 import sys
 import os
+import re
 from lector_notas import LectorNotasCSV
 
 #Get the path to the main dir
@@ -14,6 +15,13 @@ ln = LectorNotasCSV('/tmp/listado.csv')
 with open("/tmp/listado.csv", 'r') as archivo:
     ll = archivo.readlines()
 
+def check_float(s):
+    if re.match('^[0-9]+\.+[0-9]+$', s):
+        return '{0:3.2f}'.format(float(s))
+    else:
+        return s
+
+
 notas = open(os.path.join(BASE_DIR, 'FormatoNotas/notas.cvs'),'w')
 
 ltex = "%% ESTE ES EL ARCHIVO PARA LA TABLA \n"
@@ -24,7 +32,7 @@ for ind,l in enumerate(ll[:-1]):
     else:
         obs = 'Obs'
 
-    ltex += '&'.join([c for k,c in enumerate(lsep) if k not in [3,8]]) +\
+    ltex += '&'.join([check_float(c) for k,c in enumerate(lsep) if k not in list(range(3,14))+[17]]) +\
             '&' + obs + "\\\\ \n \\hline \n"
 
 notas.write(ltex)
