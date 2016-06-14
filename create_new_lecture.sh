@@ -3,12 +3,25 @@
 #   Usage:
 #   Default value
 #     $ create_new_clase.sh [number of the class you want to create]
+
 #   -t <number>
 #   el numero de la tarea que se esta creando
+
 #   -h <dirname>
 #   the flag -h nameofdir to create directory for homeworks
+
 #   -e <dirname>
 #   create a exam directory
+
+#   -l 
+#   list email files in Listados.ods
+
+#   -s
+#   Create sylabus of the course
+
+#   -f
+#   Create FormatoNotas directory
+
 #   Example:
 #   To create the file of class 4 quickly:
 #    $ ./create_new_clase.sh 4
