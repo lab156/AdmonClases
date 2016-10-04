@@ -1,0 +1,8 @@
+class Config():
+    def __init__(self):
+        self.asunto = 'Nota del Primer Examen'
+        self.exa_num = 'Exa 1'
+        self.histograma = True
+        self.email_header_list = ["Correo Personal", "Correo Institucional"]
+        self.Listado = 'Listado.ods'
+

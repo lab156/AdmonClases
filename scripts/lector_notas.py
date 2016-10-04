@@ -59,15 +59,18 @@ class LectorNotasCSV():
     def correos_validos(self,examen,**kwargs):
         """
         Retorna una lista (sin ningun orden en especifico)
-        de todas las notas validas. Para fines estadisticos
+        de todos los correos con notas validas. 
+        Con el proposito no enviar notificacion a los alumnos 
+        que no hicieron examen.
 
         examen: cadena con el nombre de la columna
         """
-        campo = kwargs.get('campo','Correo Electronico')
+        campos = kwargs.get('campos', None)
         salida = []
         for l in self.Dlist:
             if self.es_buen_correo(l,examen):
-                salida.append(l[campo])
+                correos = [l.get(ef, None) for ef in campos]
+                salida.append(correos)
         return salida
 
     def buscar_por_campo(self,direc,*args,**kwargs):

@@ -14,3 +14,9 @@ cp AdmonClases/templates/git_ignore_default .gitignore
 
 #Copiamos el archivo de vimdir
 cp AdmonClases/templates/vim_dir .vimdir
+
+#Link email_it to run it from Course Root dir
+ln -s AdmonClases/scripts/email_it.py .
+
+#Copiamos el archivo de opciones para el correo
+cp AdmonClases/templates/config_correo_py_template config_correo.py
