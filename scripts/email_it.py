@@ -8,22 +8,22 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 from email import encoders
-import msg_functions as ms
+#import msg_functions as ms
 from lector_notas import LectorNotasCSV
 #from django.template import Template, Context
 #from django.conf import settings
 from jinja2 import Template
 import subprocess
 import argparse
-from config_correo import Config
-C = Config()
+#from config_correo import Config
+#C = Config()
 #settings.configure()
 
 #Parser for the commandline options
 argus = argparse.ArgumentParser(description="Enviar correo a los alumnos")
 #argus.add_argument('listado', help="Ubicacion del archivo con los listados")
 
-argus.add_argument('mens', help="Ubicacion del archivo con la plantilla del mensaje")
+argus.add_argument('mens', type=str, help="Ubicacion del archivo con la plantilla del mensaje")
 
 argus.add_argument('--hoysi', dest='to_all', action='store_true', default=False, help="Enviar correo a todos los destinatario, sin esta opcion el correo solo se manda a Luis.")
 
@@ -31,14 +31,24 @@ argus.add_argument('--hist', dest='hist', action='store_true', default=False, he
 
 argus.add_argument('-a', '--attach', type=str,  help="Adjuntar un archivo al mensaje, por ejemplo el pdf de una tarea.")
 
+argus.add_argument('-n', '--exanum', type=str,  help="Especificar el encabezado de la columna a examinar ej. Exa 1")
+    
+argus.add_argument('-c', '--correos', type=str, nargs='*',
+        help="Las columnas denominadas correos para sacar la lista de destinatarios")
+
+argus.add_argument('-s', '--subject', type=str,  help="El asunto del correo a enviar.")
 
 args = argus.parse_args()
 
 #CONVERTIMOS EL ARCHIVO A CSV
-subprocess.call(["unoconv", "-f", "csv", "-e", "FilterOptions=44,34,76", "-o", "/tmp/listado.csv", "%s"%C.Listado])
+subprocess.call(["unoconv", "-f", "csv", "-e", "FilterOptions=44,34,76", "-o", "/tmp/listado.csv", "%s"%"Listado.ods"])
 
 #aca pongo el examen que quiero
-examen_num = C.exa_num
+#es necesario porque de ahi saco los correos validos
+if args.exanum == None:
+    raise ValueError('Debe de especificar el valor de examen_num')
+else:
+    examen_num = args.exanum
 
 with open("/tmp/listado.csv", 'r') as archivo:
     L = LectorNotasCSV(archivo)
@@ -50,7 +60,10 @@ grades = L.notas(examen_num)
 #La lista de los destinatarios (posiblemente diferente debido a los correos mal
 #ingreados al sistema)
 if args.to_all:
-    ListaDestinatarios = L.correos_validos(examen_num, campos=C.email_header_list)
+    if args.correos == None:
+        ListaDestinatarios = L.correos_validos(examen_num, campos=args.correos)
+    else:
+        raise ValueError('No hay Correos y --hoysi es True')
 else:
     ListaDestinatarios = []
 ListaDestinatarios.append(['luisberlioz@gmail.com', None])
@@ -70,7 +83,11 @@ try:
     serv.ehlo()
     print('ehlo 2 rec...')
     print('logging in...')
-    serv.login('luis.berlioz@unah.edu.hn', 'pupu.contrA1', initial_response_ok=True)
+    try:
+        email_passw = os.environ['UNAHEMAILPASSW']
+    except KeyError:
+        raise KeyError('Falta la contrasena del correo')
+    serv.login('luis.berlioz@unah.edu.hn', email_passw, initial_response_ok=True)
     print('logged in...')
     #serv.login('schafferote@gmail.com', 'tenebroso')
 except socket.gaierror:
@@ -103,7 +120,7 @@ def histograma(grades, examen_num,  guardar_en='/tmp/Histogram.png'):
 #    msg['Subject'] = 'Tu nota final'
 
 for sublista in ListaDestinatarios:
-    for li,cpo in zip(sublista, C.email_header_list):
+    for li,cpo in zip(sublista, args.correos):
         if li:
             Diccion = L.buscar_por_campo(li,context=True, campo=cpo) 
             Diccion['pri_nombre'] = L.buscar_por_campo(li,'pn', campo=cpo).capitalize()
@@ -116,7 +133,7 @@ for sublista in ListaDestinatarios:
             msg['From'] = 'Luis Berlioz <luis.berlioz@unah.edu.hn>'
             msg['To'] = li
             msg['Date'] = formatdate(localtime = True)
-            msg['Subject'] = C.asunto
+            msg['Subject'] = args.subject
 
 
             MensajeCorreo = tem.render(contex)
@@ -128,7 +145,7 @@ for sublista in ListaDestinatarios:
 
 
 # ACA ADJUNTAMOS LA IMAGEN GENERADA CON MATPLOTLIB
-            if hist:
+            if args.hist:
                 histograma(grades, examen_num)
                 part = MIMEBase('application', 'octet-stream')
                 part.set_payload( open('/tmp/Histogram.png','rb').read() )
