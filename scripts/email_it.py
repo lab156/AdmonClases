@@ -177,7 +177,7 @@ for sublista in ListaDestinatarios:
                 serv.sendmail('luis.berlioz@unah.edu.hn', li , msg.as_string())
                 print('Email successfully sent to %s email: %s'%(Diccion['pri_nombre'],li))
             except AttributeError:
-                print('Fallo envio a %s con correo %s'%(Diccion['pri_nombre'],li)
+                print('Fallo envio a %s con correo %s'%(Diccion['pri_nombre'],li))
 
 serv.close()
 
