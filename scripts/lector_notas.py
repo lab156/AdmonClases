@@ -65,6 +65,9 @@ class LectorNotasCSV():
 
         examen: cadena con el nombre de la columna
         """
+        #SI EXAMEN ES NONE RETORNE LA LISTA COMPLETA DE TODOS LOS 
+        #CORRREOS SIN NINGUNA VALIDACION
+
         campos = kwargs.get('campos', None)
         salida = []
         for l in self.Dlist:
@@ -111,13 +114,18 @@ class LectorNotasCSV():
 
         examen: es la cadena con el nombre de la columna del examen que hay que revisar.
         '''
+        # En el caso que examen sea None, queremos la lista mas completa 
+        # disponible
+        if examen == None:
+            return True
+
         nombre = D.get("Nombre Completo",False)
         if not nombre:
             return False
 
-        correo = D.get("Correo Electronico",False)
-        if not correo:
-            return False
+        #correo = D.get("Correo Electronico",False)
+        #if not correo:
+        #    return False
 
 #Los alumnos de maestria no tienen numero de cuenta
         if "Cuenta" in self.encabezados:

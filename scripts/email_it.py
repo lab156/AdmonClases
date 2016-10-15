@@ -46,7 +46,7 @@ subprocess.call(["unoconv", "-f", "csv", "-e", "FilterOptions=44,34,76", "-o", "
 #aca pongo el examen que quiero
 #es necesario porque de ahi saco los correos validos
 if args.exanum == None:
-    raise ValueError('Debe de especificar el valor de examen_num')
+    examen_num = None
 else:
     examen_num = args.exanum
 
@@ -54,23 +54,24 @@ with open("/tmp/listado.csv", 'r') as archivo:
     L = LectorNotasCSV(archivo)
 
 # DATA IN THIS ORDER NAME, GRADE, EMAIL --- 
-grades = L.notas(examen_num)
+if examen_num is not None:
+    grades = L.notas(examen_num)
+# IN ORDER TO GET THE PERCENTILES WE NEED TO SORT THE GRADES
+    grades.sort()
 
 
 #La lista de los destinatarios (posiblemente diferente debido a los correos mal
 #ingreados al sistema)
 if args.to_all:
     if args.correos == None:
-        ListaDestinatarios = L.correos_validos(examen_num, campos=args.correos)
-    else:
         raise ValueError('No hay Correos y --hoysi es True')
+    else:
+        ListaDestinatarios = L.correos_validos(examen_num, campos=args.correos)
 else:
     ListaDestinatarios = []
-ListaDestinatarios.append(['luisberlioz@gmail.com', None])
+ListaDestinatarios.append([None , 'luisberlioz@gmail.com' ])
 
 
-# IN ORDER TO GET THE PERCENTILES WE NEED TO SORT THE GRADES
-grades.sort()
 
 try:
     serv = s.SMTP('outlook.office365.com', 587)
@@ -143,6 +144,22 @@ for sublista in ListaDestinatarios:
 
             msg.attach( MIMEText(MensajeCorreo, 'html')) 
 
+            if args.attach is not None:
+                tareaf = os.path.join(os.curdir,args.attach)
+                file_lst = os.listdir(tareaf)
+                for f in file_lst:
+                    if f.startswith('MM') and f.endswith('.pdf'):
+                        fname = os.path.join(tareaf,f)
+                        
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload( open(fname,'rb').read() )
+                encoders.encode_base64(part)
+                part.add_header('Content-Disposition', 'attachment; \
+                        filename="{0}"'.format(os.path.basename(fname)))
+                    
+                msg.attach(part)
+
+
 
 # ACA ADJUNTAMOS LA IMAGEN GENERADA CON MATPLOTLIB
             if args.hist:
@@ -155,8 +172,12 @@ for sublista in ListaDestinatarios:
                 msg.attach(part)
 
 
-            serv.sendmail('luis.berlioz@unah.edu.hn', li , msg.as_string())
-            print('Email successfully sent to %s email: %s'%(Diccion['pri_nombre'],li))
+
+            try: 
+                serv.sendmail('luis.berlioz@unah.edu.hn', li , msg.as_string())
+                print('Email successfully sent to %s email: %s'%(Diccion['pri_nombre'],li))
+            except AttributeError:
+                print('Fallo envio a %s con correo %s'%(Diccion['pri_nombre'],li)
 
 serv.close()
 
