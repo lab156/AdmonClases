@@ -1,10 +1,10 @@
 #!/bin/bash
 
-python AdmonClases/scripts/email_it.py mens_primer.txt \
-         --exanum Total \
-         --subject "Notas de Seminario de Investigación" \
+python AdmonClases/scripts/email_it.py mens_tareas.txt \
+         --subject "Tarea 8 de Geometría II" \
          --correos "Correo Institucional" "Correo Personal" \
+         --attach "tarea8"\
          --hoysi \
-         #--attach "tarea7"\
+         #--exanum Total \
          #--hist 
          
