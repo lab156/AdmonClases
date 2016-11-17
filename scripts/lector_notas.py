@@ -6,7 +6,7 @@ class LectorNotasCSV():
     def __init__(self,archivo):
         #Lee la cadena o objeto archivo 
         ## la columna Cuenta se tiene que leer como cadena
-        self.df = pd.read_csv(archivo,dtype={'Cuenta':str})
+        self.df = pd.read_csv(archivo,dtype={'Cuenta':str}).fillna(value=0.0)
 
         #convierte el DataFrame en diccionarios de cada fila
         #ej. {'Correo Electronico': 'luisberlioz@gmail.com',

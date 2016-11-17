@@ -104,8 +104,8 @@ with open(args.mens ,'r') as archivo:
 def histograma(grades, examen_num,  guardar_en='/tmp/Histogram.png'):
     plt.figure(figsize=(10, 6))
     plt.hist(grades, bins=7, facecolor=(0.9, 0.9, 0.9))
-    mens_x = 34
-    mens_y = 4
+    mens_x = 26
+    mens_y = 1.7
     plt.arrow(mens_x,mens_y,(-mens_x+nota)*0.95,-mens_y*0.8, head_width=0.01*mens_x, head_length=0.15*mens_y,color='red')
     plt.title('Percentil de tu nota: %s%% %s'%(L.pctl(nota,examen_num),examen_num))
     plt.text(mens_x*0.95,mens_y*(1.04) ,'Tu Nota: %s'%nota, color='red')
@@ -137,7 +137,10 @@ for sublista in ListaDestinatarios:
             msg['Subject'] = args.subject
 
 
-            MensajeCorreo = tem.render(contex)
+            try:
+                MensajeCorreo = tem.render(contex)
+            except jinja2.exceptions.UndefinedError:
+                print('Al parecer %s no tiene %s'(Diccion['pri_nombre'], cpo))
 
             with open('message_preview.html', 'w') as preview:
                 preview.write(MensajeCorreo)
@@ -177,7 +180,7 @@ for sublista in ListaDestinatarios:
                 serv.sendmail('luis.berlioz@unah.edu.hn', li , msg.as_string())
                 print('Email successfully sent to %s email: %s'%(Diccion['pri_nombre'],li))
             except AttributeError:
-                print('Fallo envio a %s con correo %s'%(Diccion['pri_nombre'],li)
+                print('Fallo envio a %s con correo %s'%(Diccion['pri_nombre'],li))
 
 serv.close()
 
