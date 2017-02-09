@@ -182,7 +182,6 @@ for sublista in ListaDestinatarios:
 
 
 
-            time.sleep(30)
             try: 
                 serv.sendmail('luis.berlioz@unah.edu.hn', li , msg.as_string())
                 print('Email successfully sent to %s email: %s'%(Diccion['pri_nombre'],li))
@@ -192,6 +191,9 @@ for sublista in ListaDestinatarios:
                 print('Vergueo del sender rate!! Esperando 30 segundos')
                 time.sleep(30)
                 serv = connect('outlook.office365.com', 587)
+                #Volvemos a intentar mandas el mensaje
+                serv.sendmail('luis.berlioz@unah.edu.hn', li , msg.as_string())
+                print('Email successfully sent to %s email: %s'%(Diccion['pri_nombre'],li))
 
 serv.close()
 
