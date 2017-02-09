@@ -15,6 +15,7 @@ from lector_notas import LectorNotasCSV
 from jinja2 import Template
 import subprocess
 import argparse
+import time
 #from config_correo import Config
 #C = Config()
 #settings.configure()
@@ -41,7 +42,8 @@ argus.add_argument('-s', '--subject', type=str,  help="El asunto del correo a en
 args = argus.parse_args()
 
 #CONVERTIMOS EL ARCHIVO A CSV
-subprocess.call(["unoconv", "-f", "csv", "-e", "FilterOptions=44,34,76", "-o", "/tmp/listado.csv", "%s"%"Listado.ods"])
+unoconv_proc = subprocess.Popen(["unoconv", "-f", "csv", "-e", "FilterOptions=44,34,76", "-o", "/tmp/listado.csv", "%s"%"Listado.ods"])
+unoconv_proc.wait()
 
 #aca pongo el examen que quiero
 #es necesario porque de ahi saco los correos validos
@@ -73,26 +75,30 @@ ListaDestinatarios.append([None , 'luisberlioz@gmail.com' ])
 
 
 
-try:
-    serv = s.SMTP('outlook.office365.com', 587)
-    #serv = s.SMTP('smtp.gmail.com', 587)
-    print('ehlo 1...')
-    serv.ehlo()
-    print('ehlo 1 rec...')
-    serv.starttls()
-    print('ehlo 2...')
-    serv.ehlo()
-    print('ehlo 2 rec...')
-    print('logging in...')
+def connect(email_address, email_port):
     try:
-        email_passw = os.environ['UNAHEMAILPASSW']
-    except KeyError:
-        raise KeyError('Falta la contrasena del correo')
-    serv.login('luis.berlioz@unah.edu.hn', email_passw, initial_response_ok=True)
-    print('logged in...')
-    #serv.login('schafferote@gmail.com', 'tenebroso')
-except socket.gaierror:
-    raise RuntimeError('El correo de la U si puede ser mierda; no esta aceptando.')
+        serv = s.SMTP(email_address, email_port)
+        #serv = s.SMTP('smtp.gmail.com', 587)
+        print('ehlo 1...')
+        serv.ehlo()
+        print('ehlo 1 rec...')
+        serv.starttls()
+        print('ehlo 2...')
+        serv.ehlo()
+        print('ehlo 2 rec...')
+        print('logging in...')
+        try:
+            email_passw = os.environ['UNAHEMAILPASSW']
+        except KeyError:
+            raise KeyError('Falta la contrasena del correo')
+        serv.login('luis.berlioz@unah.edu.hn', email_passw, initial_response_ok=True)
+        print('logged in...')
+        #serv.login('schafferote@gmail.com', 'tenebroso')
+    except socket.gaierror:
+        raise RuntimeError('El correo de la U si puede ser mierda; no esta aceptando.')
+    return serv
+
+serv = connect('outlook.office365.com', 587)
     
 #serv.login('lab156@case.edu', 'Ch?n!la1')
 
@@ -176,11 +182,16 @@ for sublista in ListaDestinatarios:
 
 
 
+            time.sleep(30)
             try: 
                 serv.sendmail('luis.berlioz@unah.edu.hn', li , msg.as_string())
                 print('Email successfully sent to %s email: %s'%(Diccion['pri_nombre'],li))
             except AttributeError:
                 print('Fallo envio a %s con correo %s'%(Diccion['pri_nombre'],li))
+            except s.SMTPSenderRefused:
+                print('Vergueo del sender rate!! Esperando 30 segundos')
+                time.sleep(30)
+                serv = connect('outlook.office365.com', 587)
 
 serv.close()
 
