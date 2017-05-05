@@ -12,7 +12,7 @@ from email import encoders
 from lector_notas import LectorNotasCSV
 #from django.template import Template, Context
 #from django.conf import settings
-from jinja2 import Template
+from jinja2 import Template, exceptions
 import subprocess
 import argparse
 import time
@@ -145,10 +145,10 @@ for sublista in ListaDestinatarios:
 
             try:
                 MensajeCorreo = tem.render(contex)
-            except jinja2.exceptions.UndefinedError:
-                print('Al parecer %s no tiene %s'(Diccion['pri_nombre'], cpo))
-            except KeyError as K:
+            except exceptions.UndefinedError as K:
+                print('Al parecer %s no tiene %s'%(Diccion['pri_nombre'], cpo))
                 print('Ocurrio un KeyError: %s estas seguro que PAUTA esta bien escrito con mi correo en el campo de correo personal?'%K)
+                sys.exit(1)
 
             with open('message_preview.html', 'w') as preview:
                 preview.write(MensajeCorreo)
