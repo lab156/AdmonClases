@@ -147,6 +147,8 @@ for sublista in ListaDestinatarios:
                 MensajeCorreo = tem.render(contex)
             except jinja2.exceptions.UndefinedError:
                 print('Al parecer %s no tiene %s'(Diccion['pri_nombre'], cpo))
+            except KeyError as K:
+                print('Ocurrio un KeyError: %s estas seguro que PAUTA esta bien escrito con mi correo en el campo de correo personal?'%K)
 
             with open('message_preview.html', 'w') as preview:
                 preview.write(MensajeCorreo)
