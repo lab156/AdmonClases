@@ -154,6 +154,16 @@ class LectorNotasCSV():
                 return 100.0
         return round(abs((i - 0.5)*100/len(grades)))
 
+    def get_col_index(self, cols):
+        return [self.df.columns.get_loc(s) for s in cols]
+
+    def nombre_nota_final(self):
+        ''' 
+        retorna nombre de la ultima columna de la dataframe
+        normalmente esta es la columns de las notas finales
+        '''
+        return self.df.columns[-1]
+
     def observaciones(self, ind, nota_final="Total"):
         '''
         Para un indice, devuelve las observaciones en cuanto a los examenes 
