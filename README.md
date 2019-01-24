@@ -8,3 +8,10 @@ git submodule add https://github.com/lab156/AdmonClases.git
 
 Then cd to the scripts directory and run the install script.
 
+To installed in a cloned repo
+
+git submodule init
+git submodule update
+
+
+
