@@ -10,8 +10,8 @@ Then cd to the scripts directory and run the install script.
 
 To installed in a cloned repo
 
-git submodule init
-git submodule update
+`git submodule init`
+`git submodule update`
 
 
 
