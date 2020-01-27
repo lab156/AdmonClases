@@ -127,6 +127,11 @@ function new_dir {
     mkdir $1 &&\
         plantillar2 ${GETDIR}templates/${FILEPREFIX}_$FILESUFFIX.tex $ORDINAL>$1/${COURSECODE}_$NAMEOFDIR.tex  &&\
         touch $1/$FILESUFFIX.tex &&\
+        # Fill in the gitignore with the exact name of the files to ignore
+        echo ${COURSECODE}_$NAMEOFDIR.pdf >> $1/.gitignore &&\
+        echo ${COURSECODE}_$NAMEOFDIR.fls >> $1/.gitignore &&\
+        echo ${COURSECODE}_$NAMEOFDIR.fdb_latexmk >> $1/.gitignore &&\
+        echo ${COURSECODE}_$NAMEOFDIR.tex_latexmain >> $1/.gitignore &&\
         #It appears that ln only works when they are created from 
         #the inside of the directory
         cd $1 &&\
