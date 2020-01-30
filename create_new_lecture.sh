@@ -130,8 +130,10 @@ function new_dir {
         # Fill in the gitignore with the exact name of the files to ignore
         echo ${COURSECODE}_$NAMEOFDIR.pdf >> $1/.gitignore &&\
         echo ${COURSECODE}_$NAMEOFDIR.fls >> $1/.gitignore &&\
+        echo ${COURSECODE}_$NAMEOFDIR.log >> $1/.gitignore &&\
+        echo ${COURSECODE}_$NAMEOFDIR.aux >> $1/.gitignore &&\
         echo ${COURSECODE}_$NAMEOFDIR.fdb_latexmk >> $1/.gitignore &&\
-        echo ${COURSECODE}_$NAMEOFDIR.tex_latexmain >> $1/.gitignore &&\
+        echo ${COURSECODE}_$NAMEOFDIR.tex.latexmain >> $1/.gitignore &&\
         #It appears that ln only works when they are created from 
         #the inside of the directory
         cd $1 &&\
