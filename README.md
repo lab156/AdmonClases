@@ -4,15 +4,19 @@ A collection of scripts to manage daily lectures.
 #Installing
 Inside the class directory, add AdmonClases as a submodule with the following command:
 
-git submodule add https://github.com/lab156/AdmonClases.git
+git submodule add git@github.com:lab156/AdmonClases.git
 
-Then cd to the scripts directory and run the install script.
-
-To install the submodule:
+`cd AdmonClases/scripts`
 
 `git submodule init`
 
 `git submodule update`
+
+
+# Getting Email lists
+`python listado_utils.py ../../Listado***`
+
+In Thunderbird, create new email list and copy the previous output.
 
 
 
