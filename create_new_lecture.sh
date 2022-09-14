@@ -185,6 +185,11 @@ elif [ "$NAMEOFDIR" == "FormatoNotas" ] ; then
         ${GETDIR}scripts/formateador.py &&\
         cp ${GETDIR}images/logo.jpg $NAMEOFDIR
     exit 0
+
+elif [ "$NAMEOFDIR" == "silabo" ] ; then
+    new_dir $NAMEOFDIR
+    exit 0
+
 else
     new_dir $NAMEOFDIR
     exit 0
