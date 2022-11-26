@@ -16,6 +16,7 @@ from jinja2 import Template, exceptions
 import subprocess
 import argparse
 import time
+import listado_utils as lu
 #from config_correo import Config
 #C = Config()
 #settings.configure()
@@ -42,8 +43,8 @@ argus.add_argument('-s', '--subject', type=str,  help="El asunto del correo a en
 args = argus.parse_args()
 
 #CONVERTIMOS EL ARCHIVO A CSV
-unoconv_proc = subprocess.Popen(["unoconv", "-f", "csv", "-e", "FilterOptions=44,34,76", "-o", "/tmp/listado.csv", "%s"%"Listado.ods"])
-unoconv_proc.wait()
+#unoconv_proc = subprocess.Popen(["unoconv", "-f", "csv", "-e", "FilterOptions=44,34,76", "-o", "/tmp/listado.csv", "%s"%"Listado.ods"])
+#unoconv_proc.wait()
 
 #aca pongo el examen que quiero
 #es necesario porque de ahi saco los correos validos
@@ -52,9 +53,10 @@ if args.exanum == None:
 else:
     examen_num = args.exanum
 
-with open("/tmp/listado.csv", 'r') as archivo:
-    L = LectorNotasCSV(archivo)
-
+#with open("/tmp/listado.csv", 'r') as archivo:
+archivo = "Listado.ods"
+L = LectorNotasCSV(archivo)
+#
 # DATA IN THIS ORDER NAME, GRADE, EMAIL --- 
 if examen_num is not None:
     grades = L.notas(examen_num)
@@ -71,7 +73,7 @@ if args.to_all:
         ListaDestinatarios = L.correos_validos(examen_num, campos=args.correos)
 else:
     ListaDestinatarios = []
-ListaDestinatarios.append([None , 'luisberlioz@gmail.com' ])
+ListaDestinatarios.append(['luisberlioz@gmail.com' ])
 
 
 
@@ -126,9 +128,14 @@ def histograma(grades, examen_num,  guardar_en='/tmp/Histogram.png'):
 #    msg['Date'] = formatdate(localtime = True)
 #    msg['Subject'] = 'Tu nota final'
 
+print(f"{ListaDestinatarios=}")
+print(f"{args.correos=}")
 for sublista in ListaDestinatarios:
+    print(f"{sublista=}")
     for li,cpo in zip(sublista, args.correos):
         if li:
+            print(f"{li=}")
+            print(f"{cpo=}")
             Diccion = L.buscar_por_campo(li,context=True, campo=cpo) 
             Diccion['pri_nombre'] = L.buscar_por_campo(li,'pn', campo=cpo).capitalize()
             nota = float(L.buscar_por_campo(li, campo=cpo).get(examen_num,-1))

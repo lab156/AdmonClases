@@ -43,6 +43,15 @@ def get_dataframe_from_listado(path):
     
     return alumnos_df
 
+def read_ods_listado(path):
+    '''
+    returns a pandas dataframe out of Listado.ods located at path 
+    '''
+    listado = pd.read_excel(path)
+    listado = listado.fillna(0) 
+    return listado
+
+
 def main():
     for r in get_dataframe_from_listado(listado_path).iterrows():
         print(f"{r[1][1]} <{r[1][2]}>")

@@ -1,12 +1,21 @@
 import csv
 import pandas as pd
+import os
 #Define una clase que toma un archivo abierto
 
 class LectorNotasCSV():
     def __init__(self,archivo):
         #Lee la cadena o objeto archivo 
         ## la columna Cuenta se tiene que leer como cadena
-        self.df = pd.read_csv(archivo,dtype={'Cuenta':str}).fillna(value=0.0)
+        the_rest, extension = os.path.splitext(archivo)
+
+        match extension:
+            case '.csv':
+                self.df = pd.read_csv(archivo,dtype={'Cuenta':str}).fillna(value=0.0)
+            case '.ods':
+                self.df = pd.read_excel(archivo,dtype={'Cuenta':str}).fillna(value=0.0)
+            case other:
+                raise NotImplementedError(f'The extension {extension} is not supported yet')
 
         #convierte el DataFrame en diccionarios de cada fila
         #ej. {'Correo Electronico': 'luisberlioz@gmail.com',
