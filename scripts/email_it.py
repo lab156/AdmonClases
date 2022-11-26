@@ -128,14 +128,9 @@ def histograma(grades, examen_num,  guardar_en='/tmp/Histogram.png'):
 #    msg['Date'] = formatdate(localtime = True)
 #    msg['Subject'] = 'Tu nota final'
 
-print(f"{ListaDestinatarios=}")
-print(f"{args.correos=}")
 for sublista in ListaDestinatarios:
-    print(f"{sublista=}")
     for li,cpo in zip(sublista, args.correos):
         if li:
-            print(f"{li=}")
-            print(f"{cpo=}")
             Diccion = L.buscar_por_campo(li,context=True, campo=cpo) 
             Diccion['pri_nombre'] = L.buscar_por_campo(li,'pn', campo=cpo).capitalize()
             nota = float(L.buscar_por_campo(li, campo=cpo).get(examen_num,-1))
