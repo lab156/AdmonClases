@@ -9,9 +9,9 @@
 
 Hola {{ pri_nombre|default(NombreCompleto) }},<br><br>
 Adjunto encontrarás  el silabo de Programación Matemática II. Cualquier duda estamos a la
-orden.
+orden.<br>
 
-Éxitos,
+Éxitos, <br>
 
 Luis Berlioz 
 
