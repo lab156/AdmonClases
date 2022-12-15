@@ -1,6 +1,7 @@
 import csv
 import pandas as pd
 import os
+from collections import Counter
 #Define una clase que toma un archivo abierto
 
 class LectorNotasCSV():
@@ -212,6 +213,51 @@ class LectorNotasCSV():
             fil.append(self.observaciones(ind, obs)[0])
 
         return '&'.join([f for k,f in enumerate(fil) if k not in not_in_list])
+
+    def resultado_stats(self, col='Resul',
+            cnt_dict={'APR': 0, 'RPB': 0, 'ABD': 0, 'NSP': 0},
+            print_summary=True):
+        '''
+        retorna las estadisticas segun aprobados, reprobados, etc
+        '''
+        Df = self.df
+        if Df[Df['Nombre Completo'].str.contains('PAUTA')].size == 0:
+            print("No se encontro un renglon con PAUTA")
+        else:
+            print("se elimino el renglon de PAUTA")
+        
+        Df = Df[~Df['Nombre Completo'].str.contains('PAUTA')]
+        cn = Counter(cnt_dict)
+        cn.update(list(Df['Resul']))
+        if print_summary:
+            Total = sum(cn.values())
+            print(f"| OBS | Cuenta |   %   |")
+            print(f"========================")
+            for obs, cant in cn.items():
+                print(f"| {obs} | {cant:>6} | {100*cant/Total:>4.1f}% |")
+            print(f"========================")
+            print(f"Total: {Total}")
+        return cn
+
+def main():
+    import argparse
+    import sys
+    parser = argparse.ArgumentParser(
+            description='Operaciones con listados.')
+    parser.add_argument('archivo', type=str)
+    parser.add_argument('-e', '--estadisticas', 
+        help='Imprimir las estadisticas final de una clase', 
+                        action='store_true')
+    args = parser.parse_args(sys.argv[1:])
+
+
+    listado = LectorNotasCSV(args.archivo)
+    if args.estadisticas:
+        listado.resultado_stats(print_summary=True)
+
+if __name__ == "__main__":
+    main()
+
 
 
         
