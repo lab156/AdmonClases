@@ -6,7 +6,7 @@ def get_dataframe_from_listado(path):
     '''
     Crea una pandas dataframe de un listado (.xls) de la Unah
     '''
-    li = etree.parse(listado_path)
+    li = etree.parse(path)
     tr_lst = li.findall('//tr')
     row_it = li.getiterator('tr')
     headers = [h.text for h in next(row_it).findall('./th')]

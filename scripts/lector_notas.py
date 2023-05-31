@@ -2,6 +2,8 @@ import csv
 import pandas as pd
 import os
 from collections import Counter
+import listado_utils as lu
+
 #Define una clase que toma un archivo abierto
 
 class LectorNotasCSV():
@@ -12,9 +14,19 @@ class LectorNotasCSV():
 
         match extension:
             case '.csv':
-                self.df = pd.read_csv(archivo,dtype={'Cuenta':str}).fillna(value=0.0)
+                self.df = pd.read_csv(archivo,
+                               index_col=0,
+                               dtype={'Cuenta':str}
+                                      ).fillna(value=0.0)
             case '.ods':
-                self.df = pd.read_excel(archivo,dtype={'Cuenta':str}).fillna(value=0.0)
+                self.df = pd.read_excel(archivo, 
+                            index_col=0, 
+                        dtype={'Cuenta':str}).fillna(value=0.0)
+                # after this the name of the index is Nº
+                self.df.index.name = None
+            case '.xls':
+                # this is just XML
+                self.df = lu.get_dataframe_from_listado(archivo)
             case other:
                 raise NotImplementedError(f'The extension {extension} is not supported yet')
 
@@ -245,15 +257,28 @@ def main():
     parser = argparse.ArgumentParser(
             description='Operaciones con listados.')
     parser.add_argument('archivo', type=str)
+
     parser.add_argument('-e', '--estadisticas', 
         help='Imprimir las estadisticas final de una clase', 
                         action='store_true')
+
+    parser.add_argument('-l', '--lista', 
+        help='imprimir la lista de los correos de estudiantes', 
+                        action='store_true')
+
     args = parser.parse_args(sys.argv[1:])
 
 
     listado = LectorNotasCSV(args.archivo)
     if args.estadisticas:
         listado.resultado_stats(print_summary=True)
+    if args.lista:
+        #for r in lu.get_dataframe_from_listado(args.archivo)\
+                #        .iterrows():
+            #print(f"{r[1][1]} <{r[1][2]}>")
+        for r in listado.df.iterrows():
+            print(f"{r[1][1]} <{r[1][2]}>")
+
 
 if __name__ == "__main__":
     main()
