@@ -277,7 +277,7 @@ def main():
                 #        .iterrows():
             #print(f"{r[1][1]} <{r[1][2]}>")
         for r in listado.df.iterrows():
-            print(f"{r[1][1]} <{r[1][2]}>")
+            print(f"{r[1][1]} <{r[1][1]}>")
 
 
 if __name__ == "__main__":

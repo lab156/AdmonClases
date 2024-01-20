@@ -14,7 +14,7 @@ git submodule add git@github.com:lab156/AdmonClases.git
 
 
 # Getting Email lists
-`python listado_utils.py ../../Listado***`
+`python lector_notas.py -l ../../NotasPropedeutico.ods`
 
 In Thunderbird, create new email list and copy the previous output.
 
