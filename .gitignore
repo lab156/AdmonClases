@@ -3,4 +3,4 @@
 *~
 #IGNORE PYTHONs EXECUTION FILES
 __pycache__
-
+scripts/.ipynb_checkpoints
