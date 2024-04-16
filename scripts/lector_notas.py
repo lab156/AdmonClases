@@ -23,7 +23,8 @@ class LectorNotasCSV():
                             index_col=0, 
                         dtype={'Cuenta':str}).fillna(value=0.0)
                 # after this the name of the index is Nº
-                self.df.index.name = None
+                # This erases the first column
+                #self.df.index.name = None
             case '.xls':
                 # this is just XML
                 self.df = lu.get_dataframe_from_listado(archivo)
@@ -63,8 +64,10 @@ class LectorNotasCSV():
                     notita = float(l[examen])
                     if notita > 0:
                         salida.append(notita)
-            except ValueError:
-                pass
+            except KeyError as ee: 
+                print(ee)
+                print(f"{l=}")
+                raise KeyError(ee)
         return salida
 
     def list_email_addresses(self):

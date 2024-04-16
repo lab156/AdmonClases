@@ -27,6 +27,8 @@ argus = argparse.ArgumentParser(description="Enviar correo a los alumnos")
 
 argus.add_argument('mens', type=str, help="Ubicacion del archivo con la plantilla del mensaje")
 
+argus.add_argument('-l', '--listado', default="Listado.ods", type=str, help="Nombre del archivo con las notas y correos y nombres.")
+
 argus.add_argument('--hoysi', dest='to_all', action='store_true', default=False, help="Enviar correo a todos los destinatario, sin esta opcion el correo solo se manda a Luis.")
 
 argus.add_argument('--hist', dest='hist', action='store_true', default=False, help="Generar y adjuntar un histograma de frecuencias de notas.")
@@ -54,7 +56,7 @@ else:
     examen_num = args.exanum
 
 #with open("/tmp/listado.csv", 'r') as archivo:
-archivo = "Listado.ods"
+archivo = args.listado 
 L = LectorNotasCSV(archivo)
 #
 # DATA IN THIS ORDER NAME, GRADE, EMAIL --- 

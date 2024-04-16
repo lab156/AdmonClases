@@ -25,3 +25,4 @@ cp AdmonClases/scripts/enviar_notas.sh .
 #Copiamos el archivo de opciones para el correo
 cp AdmonClases/templates/config_correo_py_template config_correo.py
 cp AdmonClases/templates/mens_tareas_def.txt mens_tareas.txt
+cp AdmonClases/templates/mens_notas_acum_def.txt mens_notas_acum.txt
