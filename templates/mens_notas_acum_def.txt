@@ -31,9 +31,9 @@ Tus notas acumuladas en Análisis son las siguientes: <br>
         </tr>
 </table>
 <br>
-Favor revisar que mis registros coincidan con las notas recibidas. Cualquier inconveniente por favor hacermelo saber por este medio.
+Favor revisar que mis registros coincidan con las notas recibidas. Cualquier inconveniente por favor hacermelo saber por este medio.<br><br>
 
-Éxitos,
+Éxitos,<br><br>
 
 Luis Berlioz 
 
