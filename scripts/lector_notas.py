@@ -20,7 +20,7 @@ class LectorNotasCSV():
                                       ).fillna(value=0.0)
             case '.ods':
                 self.df = pd.read_excel(archivo, 
-                            index_col=0, 
+                           # index_col=0, 
                         dtype={'Cuenta':str}).fillna(value=0.0)
                 # after this the name of the index is Nº
                 # This erases the first column
