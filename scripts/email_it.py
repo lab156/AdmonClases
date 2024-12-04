@@ -17,9 +17,12 @@ import subprocess
 import argparse
 import time
 import listado_utils as lu
+from dotenv import load_dotenv
 #from config_correo import Config
 #C = Config()
 #settings.configure()
+
+_ = load_dotenv()
 
 #Parser for the commandline options
 argus = argparse.ArgumentParser(description="Enviar correo a los alumnos")
@@ -103,8 +106,6 @@ def connect(email_address, email_port):
     return serv
 
 serv = connect('outlook.office365.com', 587)
-    
-#serv.login('lab156@case.edu', 'Ch?n!la1')
 
 #THE TEMPLATE SHOULD ONLY BE CREATED ONCE FOR EFFICIENCY
 #WHAT CHANGES IS THE CONTEXT
