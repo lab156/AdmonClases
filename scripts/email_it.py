@@ -100,7 +100,6 @@ def connect(email_address, email_port):
             raise KeyError('Falta la contrasena del correo')
         serv.login('luis.berlioz@unah.edu.hn', email_passw, initial_response_ok=True)
         print('logged in...')
-        #serv.login('schafferote@gmail.com', 'tenebroso')
     except socket.gaierror:
         raise RuntimeError('El correo de la U si puede ser mierda; no esta aceptando.')
     return serv
