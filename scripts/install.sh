@@ -12,6 +12,9 @@ cp AdmonClases/templates/course_info_default course_info
 #Copiamos el archivo de gitignore
 cp AdmonClases/templates/git_ignore_default .gitignore
 
+# Copiamos el archivo pyproject
+cp AdmonClases/templates/pyproject.bak pyproject.toml
+
 #Copiamos el archivo de vimdir
 cp AdmonClases/templates/vim_dir .vimdir
 
